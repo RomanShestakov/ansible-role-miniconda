@@ -3,9 +3,9 @@
 
 - name: Download miniconda python distribution
   sudo: False
-  get_url: 
-    url: http://repo.continuum.io/miniconda/Miniconda-3.0.0-Linux-x86_64.sh 
-    dest: /tmp/miniconda.sh 
+  get_url:
+    url: {{ url }}
+    dest: /tmp/miniconda.sh
     mode: 0755
 
 - name: Execute the miniconda setup script
