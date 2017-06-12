@@ -8,6 +8,13 @@
     dest: /tmp/miniconda.sh
     mode: 0755
 
+- name: Add anaconda account
+  user: name={{ item.name }}
+    shell: /bin/bash
+    # groups: admins,developers
+    # append: yes
+  with_items: conda
+
 - name: Execute the miniconda setup script
   sudo: True
   shell: /tmp/miniconda.sh -b -p {{ miniconda_home }} creates={{ miniconda_home }} executable=/bin/bash
