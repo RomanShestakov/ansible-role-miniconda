@@ -9,14 +9,14 @@
     mode: 0755
 
 - name: Execute the miniconda setup script
-  sudo: False
+  sudo: True
   shell: /tmp/miniconda.sh -b -p {{ miniconda_home }} creates={{ miniconda_home }} executable=/bin/bash
   notify:
     - remove miniconda setup script
 
 - name: Add miniconda to the PATH
-  sudo: False
-  shell: "echo '{{ item }}' >> ~/.bashrc executable=/bin/bash"
+  sudo: True
+  shell: "echo '{{ item }}' >> /etc/profiles.d executable=/bin/bash"
   with_items:
   - "export PATH={{ miniconda_home }}/bin:$PATH"
 
