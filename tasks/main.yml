@@ -10,9 +10,7 @@
 
 - name: Add anaconda account
   user: name={{ item.name }}
-    shell: /bin/bash
-    # groups: admins,developers
-    # append: yes
+        shell=/bin/bash
   with_items: conda
 
 - name: Execute the miniconda setup script
