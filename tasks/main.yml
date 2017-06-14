@@ -26,6 +26,15 @@
   notify:
     - remove miniconda setup script
 
+- name: Set dir permissions
+  sudo: True
+  file: dest={{ miniconda_home }}
+        state=directory
+        owner=root
+        group=conda
+        mode='u=rwX,g=rwX,o=rX'
+        recurse=yes
+
 - name: Add miniconda to the PATH
   sudo: True
   shell: "echo '{{ item }}' >> /etc/profiles.d executable=/bin/bash"
