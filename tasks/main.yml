@@ -8,23 +8,6 @@
     dest: /tmp/miniconda.sh
     mode: 0755
 
-- name: Add conda group
-  sudo: True
-- group:
-    name: conda
-    state: present
-
-- name: Add anaconda account
-  sudo: True
-  user: name={{ item }}
-        group=users
-        groups=conda
-        shell=/bin/bash
-        append=yes
-        state=present
-        createhome=yes
-  with_items:
-    - conda
 
 - name: Execute the miniconda setup script
   sudo: True
