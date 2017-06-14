@@ -8,11 +8,17 @@
     dest: /tmp/miniconda.sh
     mode: 0755
 
+- name: Add conda group
+  sudo: True
+- group:
+    name: conda
+    state: present
+
 - name: Add anaconda account
   sudo: True
   user: name={{ item }}
         group=users
-        groups=wheel
+        groups=conda
         shell=/bin/bash
         append=yes
         state=present
@@ -31,7 +37,7 @@
   file: dest={{ miniconda_home }}
         state=directory
         owner=root
-        group=conda
+        group=users
         mode='u=rwX,g=rwX,o=rX'
         recurse=yes
 
