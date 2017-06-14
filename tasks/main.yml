@@ -20,7 +20,7 @@
   file: dest={{ miniconda_home }}
         state=directory
         owner=root
-        group=users
+        group=wheel
         mode='u=rwX,g=rwX,o=rX'
         recurse=yes
 
