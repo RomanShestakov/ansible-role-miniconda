@@ -1,5 +1,5 @@
 ---
 # defaults file for miniconda role
 
-miniconda_home: ~/miniconda
+miniconda_home: /opt/miniconda
 url: http://repo.continuum.io/miniconda/Miniconda-3.0.0-Linux-x86_64.sh
