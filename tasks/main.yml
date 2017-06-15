@@ -26,7 +26,7 @@
 
 - name: Add miniconda to the PATH
   sudo: True
-  shell: "echo '{{ item }}' >> /etc/profiles.d executable=/bin/bash"
+  shell: "echo '{{ item }}' >> /etc/profile.d executable=/bin/bash"
   with_items:
   - "export PATH={{ miniconda_home }}/bin:$PATH"
 
