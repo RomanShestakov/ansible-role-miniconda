@@ -37,3 +37,7 @@
 - name: Install pip
   sudo: False
   shell: "{{ miniconda_home }}/bin/conda install pip --yes -q executable=/bin/bash"
+
+- name: Install conda-build
+  sudo: False
+  shell: "{{ miniconda_home }}/bin/conda install conda-build --yes -q executable=/bin/bash"
