@@ -7,6 +7,7 @@
     url: "{{ url }}"
     dest: /tmp/miniconda.sh
     mode: 0755
+  register: conda_downloaded
 
 
 - name: Execute the miniconda setup script
@@ -14,6 +15,7 @@
   shell: /tmp/miniconda.sh -b -p {{ miniconda_home }} creates={{ miniconda_home }} executable=/bin/bash
   notify:
     - remove miniconda setup script
+  when: conda_downloaded.changed
 
 - name: Set dir permissions
   sudo: True
@@ -23,21 +25,26 @@
         group=wheel
         mode='u=rwX,g=rwX,o=rX'
         recurse=yes
+  when: conda_downloaded.changed
 
 - name: Add miniconda to the PATH
   sudo: True
   shell: "echo '{{ item }}' >> /etc/profile.d/conda.sh executable=/bin/bash"
   with_items:
   - "export PATH={{ miniconda_home }}/bin:$PATH"
+  when: conda_downloaded.changed
 
 - name: Update conda to latest version
   sudo: False
   shell: "{{ miniconda_home }}/bin/conda update conda --yes -q executable=/bin/bash"
+  when: conda_downloaded.changed
 
 - name: Install pip
   sudo: False
   shell: "{{ miniconda_home }}/bin/conda install pip --yes -q executable=/bin/bash"
+  when: conda_downloaded.changed
 
 - name: Install conda-build
   sudo: False
   shell: "{{ miniconda_home }}/bin/conda install conda-build --yes -q executable=/bin/bash"
+  when: conda_downloaded.changed
